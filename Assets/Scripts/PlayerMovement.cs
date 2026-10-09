@@ -157,4 +157,24 @@ public class PlayerMovement : MonoBehaviour
             currentPlatform = null;
         }
     }
+
+    // Método público para aplicar el potenciador desde la esfera
+    public void ApplyPowerUp(float speedMultiplier, float jumpMultiplier, float duration)
+    {
+        StartCoroutine(PowerUpRoutine(speedMultiplier, jumpMultiplier, duration));
+    }
+
+    private System.Collections.IEnumerator PowerUpRoutine(float speedMultiplier, float jumpMultiplier, float duration)
+    {
+        // Aumentar un 200% significa multiplicar x3 la velocidad y el salto original
+        speed *= speedMultiplier;
+        jumpForce *= jumpMultiplier;
+
+        // Esperar el tiempo activo del power-up (10 segundos)
+        yield return new WaitForSeconds(duration);
+
+        // Restaurar los valores originales
+        speed /= speedMultiplier;
+        jumpForce /= jumpMultiplier;
+    }
 }
