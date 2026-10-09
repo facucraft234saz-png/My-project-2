@@ -119,7 +119,9 @@ Al entregar correctamente la caja en la zona correspondiente, se activa el **eve
 - [x] Zona de entrega (GoalZone) condicional.
 - [x] Mensaje de victoria e interfaz UI.
 - [x] Cambio de color de la meta al ganar.
-
+---
+Autor
+[Robert Fuentes Facundo Guillermo] - DNI: [46597991]
 ---
 
 ## Ejemplo de código
@@ -132,3 +134,4 @@ void Start()
     // Llama a SpawnProjectile repetidamente cada 'spawnTime' segundos
     InvokeRepeating(nameof(SpawnProjectile), 0f, spawnTime);
 }
+
