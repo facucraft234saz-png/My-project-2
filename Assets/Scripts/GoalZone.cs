@@ -11,8 +11,23 @@ public class GoalZone : MonoBehaviour
     public string messageVictory = "VICTORIA";
     public string messageNeedBox = "Necesitas la caja para ganar";
 
+    [Header("Ajustes de Color de Meta")]
+    [Tooltip("Color que tomará el cubo al ganar la partida")]
+    public Color victoryColor = Color.green;
+
+    private Renderer zoneRenderer;
+    private Color originalColor;
+
     private void Start()
     {
+        // Obtener el componente Renderer del objeto
+        zoneRenderer = GetComponent<Renderer>();
+        if (zoneRenderer != null)
+        {
+            // Guardar el color original para poder restaurarlo si es necesario
+            originalColor = zoneRenderer.material.color;
+        }
+
         // Ocultar el texto de victoria/mensaje al iniciar
         if (victoryText != null)
         {
@@ -31,6 +46,7 @@ public class GoalZone : MonoBehaviour
             if (box != null && box.IsPickedUp())
             {
                 ShowMessage(messageVictory);
+                ChangeZoneColor(victoryColor);
                 Debug.Log("¡El jugador ha ganado el juego!");
             }
             else
@@ -60,6 +76,14 @@ public class GoalZone : MonoBehaviour
         else
         {
             Debug.LogWarning("Falta asignar el TextMeshProUGUI en el inspector de GoalZone.");
+        }
+    }
+
+    private void ChangeZoneColor(Color newColor)
+    {
+        if (zoneRenderer != null)
+        {
+            zoneRenderer.material.color = newColor;
         }
     }
 }
